@@ -1,0 +1,100 @@
+"use client";
+
+import { useState } from "react";
+import { Task } from "@/types/task";
+
+interface TaskFormProps {
+    onAddTask: (
+        task: Omit<Task, "id" | "isCompleted">
+    ) => void;
+}
+
+export default function TaskForm({
+    onAddTask,
+}: TaskFormProps) {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [level, setLevel] = useState<
+        "Low" | "Medium" | "Hard"
+    >("Low");
+
+    const handleSubmit = (
+        e: React.FormEvent<HTMLFormElement>
+    ) => {
+        e.preventDefault();
+
+        if (!title.trim()) {
+            alert("Title cannot be empty");
+            return;
+        }
+
+        onAddTask({
+            title: title.trim(),
+            description: description.trim(),
+            level,
+        });
+
+        setTitle("");
+        setDescription("");
+        setLevel("Low");
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Title</label>
+                <br />
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) =>
+                        setTitle(e.target.value)
+                    }
+                />
+            </div>
+
+            <br />
+
+            <div>
+                <label>Description</label>
+                <br />
+                <textarea
+                    value={description}
+                    onChange={(e) =>
+                        setDescription(e.target.value)
+                    }
+                />
+            </div>
+
+            <br />
+
+            <div>
+                <label>Level</label>
+                <br />
+                <select
+                    value={level}
+                    onChange={(e) =>
+                        setLevel(
+                            e.target.value as
+                                | "Low"
+                                | "Medium"
+                                | "Hard"
+                        )
+                    }
+                >
+                    <option value="Low">Low</option>
+                    <option value="Medium">
+                        Medium
+                    </option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+
+            <br />
+
+            <button type="submit">
+                Add Task
+            </button>
+        </form>
+    );
+}
