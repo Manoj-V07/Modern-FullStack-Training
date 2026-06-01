@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import SubmitButton from "../component/SubmitButton";
 
 type FeedBackProps = {
     params: {
@@ -53,7 +54,7 @@ async function FeedBack({ params }: FeedBackProps) {
                                 <br />
                                 <br />
 
-                                <button type="submit">Submit Feedback</button>
+                                <SubmitButton />
                         </form>
                 </div>
         )
