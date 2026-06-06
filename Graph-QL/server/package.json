@@ -1,0 +1,9 @@
+{
+  "type" : "module",
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "@as-integrations/express5": "^1.1.2",
+    "cors": "^2.8.6",
+    "expess": "^0.0.1-security"
+  }
+}
